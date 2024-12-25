@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from "./_detales.module.scss"
 import GreenButton from '../../ui/greenButton/GreenButton'
 import BlueButton from '../../ui/blueButton/BlueButton'
+import { useSelector } from 'react-redux';
 function Detales({ product,onAddToBasket }) {
+    
+  const { user } = useSelector((state) => state.user);
+
+ 
     
     console.log(product)
     return (
@@ -13,11 +18,14 @@ function Detales({ product,onAddToBasket }) {
             </div>
             <div className={styles.detales_blocks}>
             <div className={styles.detales_block}><h2>{product.title}</h2></div>
-                <div className={styles.detales_block}>
-                    <span>Артикул:</span>
-                    <p>№ {product.artikul}</p>
+            {
+                user.role==="admin"&& <div className={styles.detales_block}>
+                <span>Артикул:</span>
+                <p>№ {product.artikul}</p>
 
-                </div>
+            </div>
+            }
+               
                 <div className={styles.detales_block}>
                     <span>Марка:</span>
                     <p>{product.marka}</p>
